@@ -45,7 +45,7 @@ APlayerShip::APlayerShip()
 //	PlayerMesh->SetSimulatePhysics(true);
 	AmoUIComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("AmoBar"));
 	AmoUIComp->SetupAttachment(PlayerMesh);
-	MainUiComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("MainWidgetPtr"));
+	//MainUiComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("MainWidgetPtr"));
 
 }
 

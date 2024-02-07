@@ -80,6 +80,7 @@ bool AWeek6SpaceInvaderGameModeBase::ReturnDead()
 {
     if (ArraySize == 0) {
         bAllDead = true;
+        ResetLevel();
         return bAllDead;
     }
     return false;

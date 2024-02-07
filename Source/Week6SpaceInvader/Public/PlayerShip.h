@@ -31,47 +31,64 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 public:
+
+	// Setting up the Player Mesh 
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 UStaticMeshComponent* PlayerMesh = nullptr;
 
+
+	// Setting up the spring Arm that can be attached to camera 
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 USpringArmComponent* SpringArm {nullptr};
+
+// Camera 
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 UCameraComponent* Camera = nullptr;
 
+// Movemenet speed 
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 float Speed = 5.f;
-
+	//Number of available Ammos // start with 30
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 int Ammo = 30;
 
+	//Max number of Ammos 
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 int MaxAmmo = 30;
 
+	// USoundBase for shooting sound 
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 USoundBase* ShootingSound = nullptr;
 
+	//UShapeComponent for creating a collisionBox 
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 UShapeComponent* CollisionBox =nullptr;
 
+	//reloding sound 
 UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="PlayerMesh")
 USoundBase* ReloadingSound = nullptr;
 
+	// Actors to spawn - subclass of AActor 
 UPROPERTY(EditAnywhere, meta =(AllowPrivateAccess = "true"));
 TSubclassOf<AActor> ActorToSpawn;
 
+	// Enemies 
 UPROPERTY(EditAnywhere, meta =(AllowPrivateAccess = "true"));
 TSubclassOf<AActor> ActorEney;
+
+	// UWidgetComponent to assign the AMO UI widget 
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="UI")
 class UWidgetComponent* AmoUIComp;
-
+	// UUserWidget for screen widget 
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
 TSubclassOf<UUserWidget> ScreenUiWidget;
 
+	// Main widget pointer 
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
 UUserWidget* MainWidgetPtr = nullptr;
-UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-class UWidgetComponent* MainUiComp;
+	
+//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+//class UWidgetComponent* MainUiComp;
 
 void Reload();
 
