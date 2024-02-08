@@ -13,7 +13,17 @@ ABullet::ABullet()
 	PrimaryActorTick.bCanEverTick = true;
 	RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
 	Cast<UShapeComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this,&ABullet::OnOverlap);
-	
+
+
+/* Cast<UShapeComponent>(RootComponent):
+This is attempting to cast the RootComponent to a UShapeComponent. 
+A cast is a way to tell the compiler to treat a variable as if it were of a different type.
+*/
+/*
+AddDynamic(this, &ABullet::OnOverlap): This adds a dynamic delegate binding, meaning that when the OnComponentBeginOverlap event is triggered,
+it will call the OnOverlap function of the ABullet object (this).
+The &ABullet::OnOverlap is a pointer to the member function OnOverlap of the ABullet class.
+*/
 
 }
 
