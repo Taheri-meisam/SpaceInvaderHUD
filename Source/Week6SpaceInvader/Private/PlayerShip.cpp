@@ -3,6 +3,7 @@
 #include "Components/InputComponent.h"
 #include "bullet.h"
 #include "Enemy.h"
+#include "NewWidget.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "Components/BoxComponent.h"
@@ -46,6 +47,8 @@ APlayerShip::APlayerShip()
 	AmoUIComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("AmoBar"));
 	AmoUIComp->SetupAttachment(PlayerMesh);
 	//MainUiComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("MainWidgetPtr"));
+	nwHUD = nullptr;
+	NewWidgetClass = nullptr;
 
 }
 
@@ -100,6 +103,13 @@ void APlayerShip::BeginPlay()
 	MainWidgetPtr->AddToViewport();
 	MainWidgetPtr->SetVisibility(ESlateVisibility::Visible);
 
+	APlayerController* shipcontroller = GetController<APlayerController>();
+	check(shipcontroller);
+	nwHUD = CreateWidget<UNewWidget>(shipcontroller, NewWidgetClass);
+	check(nwHUD);
+	nwHUD->AddToPlayerScreen();
+
+
 
 }
 
@@ -109,7 +119,7 @@ void APlayerShip::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	InContact = false;
 	PlayerMesh->AddRelativeLocation(FVector(XValue,YValue,0.f)*Speed);
-
+	
 }
 
 // Called to bind functionality to input
@@ -126,6 +136,8 @@ void APlayerShip::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("Reload",EInputEvent::IE_Pressed,this,&APlayerShip::Reload);
 	PlayerInputComponent->BindAction("MouseRight",EInputEvent::IE_Pressed,this,&APlayerShip::Reload);
 	PlayerInputComponent->BindAction("Restart", EInputEvent::IE_Pressed, this, &APlayerShip::ResetGame);
+
+//	nwHUD->SetEnemy(gmPtr->RetNoEnemy(), 40);
 }
 
 void APlayerShip::ResetLocation() const{
@@ -156,9 +168,8 @@ void APlayerShip::Shoot(){
 
 		}
 	}
-
-
-
+	
+	nwHUD->SetAmmo(Ammo, 30);
 	UE_LOG(LogTemp,Warning,TEXT("Shooting"));
 
 }

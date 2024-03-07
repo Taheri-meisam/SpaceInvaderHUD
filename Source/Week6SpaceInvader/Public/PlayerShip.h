@@ -14,7 +14,11 @@ UCLASS()
 class WEEK6SPACEINVADER_API APlayerShip : public APawn
 {
 	GENERATED_BODY()
-
+public:
+	
+	//APlayerShip* PPtr = Cast<APlayerShip>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+	////AWeek6SpaceInvaderGameModeBase* GameModePtrs = GetWorld()->GetAuthGameMode<AWeek6SpaceInvaderGameModeBase>();
+	//AWeek6SpaceInvaderGameModeBase* gmPtr = Cast<AWeek6SpaceInvaderGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 public:
 	// Sets default values for this pawn's properties
 	APlayerShip();
@@ -132,5 +136,11 @@ void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor *OtherActor, UPr
                         int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult);
 friend class AWeek6SpaceInvaderGameModeBase;
 
+
+UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"));
+TSubclassOf<class UNewWidget> NewWidgetClass;
+
+UPROPERTY()
+class UNewWidget* nwHUD;
 };
 
